@@ -6,6 +6,13 @@
             {!! $errors->first('tipo_receita_id', '<p class="help-block">:message</p>') !!}
         </div>
     </div>
+    <div class="col-md-4">
+        <div class="form-group {!! $errors->has('tipo_pagamento_id') ? 'has-error' : '' !!}">
+            {!! Form::label('tipo_pagamento_id', 'Tipo de Pagamento') !!}
+            {!! Form::select('tipo_pagamento_id', [''=>'']+App\Models\TipoPagamento::pluck('name','id')->all(), !empty($receita->tipo_pagamento_id)?$receita->tipo_pagamento_id:null, ['class'=>'form-control']) !!}
+            {!! $errors->first('tipo_pagamento_id', '<p class="help-block">:message</p>') !!}
+        </div>
+    </div>
  </div>
  <div class="row">
     <div class="col-md-4">

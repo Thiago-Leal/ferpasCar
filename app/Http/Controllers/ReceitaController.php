@@ -15,6 +15,12 @@ class ReceitaController extends Controller
 
 	    if(!empty($q['name'])) $query->where('name', 'LIKE', '%' . $q['name'] . '%');
 	    if(!empty($q['tipo_receita_id'])) $query->where('tipo_receita_id', $q['tipo_receita_id']);
+	    if(!empty($q['tipo_pagamento_id'])) $query->where('tipo_pagamento_id', $q['tipo_pagamento_id']);
+
+	    if(!empty($q['data'])){
+	    	$data = \DateTime::createFromFormat('d/m/Y', $q['data']);
+	    	$query->whereDate('created_at', '=', $data->format('Y-m-d'));
+	    }
 	    
 	    $query->orderBy('created_at', 'desc');
 
@@ -95,6 +101,7 @@ class ReceitaController extends Controller
 	    $fields['name'] = 'required';
 	    $fields['valor'] = 'required';
 	    $fields['tipo_receita_id'] = 'required';
+	    $fields['tipo_pagamento_id'] = 'required';
 	    
 	    return $fields;
     }

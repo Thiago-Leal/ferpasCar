@@ -5,6 +5,7 @@ use App\Http\Controllers\CustoController;
 use App\Http\Controllers\ReceitaController;
 use App\Http\Controllers\RelatorioController;
 use App\Http\Controllers\TipoCustoController;
+use App\Http\Controllers\TipoPagamentoController;
 use App\Http\Controllers\TipoReceitaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -61,6 +62,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::patch ('/receita/{receita}', [ReceitaController::class, 'update'])->name('receita.update');
 	Route::delete('/receita/{receita}', [ReceitaController::class, 'destroy'])->name('receita.destroy');
 	Route::post('/receita/{receita}', [ReceitaController::class, 'restroy'])->name('receita.restroy');
+
+	Route::get ('/tipo_pagamento', [TipoPagamentoController::class, 'index'])->name('tipo_pagamento.index');
+	Route::get ('/tipo_pagamento/create',[TipoPagamentoController::class, 'create'])->name('tipo_pagamento.create');
+	Route::post('/tipo_pagamento', [TipoPagamentoController::class, 'store'])->name('tipo_pagamento.store');
+	Route::get ('/tipo_pagamento/{tipo_pagamento}/edit', [TipoPagamentoController::class, 'edit'])->name('tipo_pagamento.edit');
+	Route::patch ('/tipo_pagamento/{tipo_pagamento}',[TipoPagamentoController::class, 'update'])->name('tipo_pagamento.update');
+	Route::delete('/tipo_pagamento/{tipo_pagamento}',[TipoPagamentoController::class, 'destroy'])->name('tipo_pagamento.destroy');
+	Route::post('/tipo_pagamento/{tipo_pagamento}',[TipoPagamentoController::class, 'restroy'])->name('tipo_pagamento.restroy');
 
 	Route::get ('/user/edit',[UserController::class, 'edit'])->name('user.edit');
 	Route::patch ('/user/{user}', [UserController::class, 'update'])->name('user.update');

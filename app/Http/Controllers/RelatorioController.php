@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Receita;
 use App\Models\Custo;
 use App\Models\TipoCusto;
+use App\Models\TipoPagamento;
+use Illuminate\Support\Facades\DB;
 
 class RelatorioController extends Controller
 {
@@ -16,6 +18,8 @@ class RelatorioController extends Controller
 
     	$retorno->receita = Receita::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->sum('valor');
 
+        $retorno->receita_dia = Receita::whereDate('created_at', date('Y-m-d'))->sum('valor');
+
         $retorno->receita_anual = Receita::whereYear('created_at', date('Y'))->sum('valor');
 
     	$retorno->custo = Custo::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->sum('valor');
@@ -24,13 +28,39 @@ class RelatorioController extends Controller
 
     	$retorno->qtd_servico = Receita::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->count();
 
+        $retorno->qtd_servico_dia = Receita::whereDate('created_at', date('Y-m-d'))->count();
+
         $retorno->qtd_servico_mes_ant = Receita::whereMonth('created_at', date('m', strtotime('last month')))
                                     ->whereYear('created_at', date('Y', strtotime('last month')))
                                     ->count();
-
+        
+        if ($retorno->qtd_servico_mes_ant == 0)
+            $retorno->diff_qtd_servico = 0;
+        else
+            $retorno->diff_qtd_servico = round(($retorno->qtd_servico - $retorno->qtd_servico_mes_ant) * 100 / $retorno->qtd_servico_mes_ant, 2);
+        
         $retorno->qtd_servico_anual = Receita::whereYear('created_at', date('Y'))->count();
 
-        $retorno->diff_qtd_servico = ($retorno->qtd_servico - $retorno->qtd_servico_mes_ant) * 100 / $retorno->qtd_servico_mes_ant;
+        $retorno->tipos_pagamento = TipoPagamento::all();
+
+        foreach ($retorno->tipos_pagamento as $tipo_pagamento)
+        {
+            $retorno->receitas_tp_pgto_mes[] = Receita::whereMonth('created_at', date('m'))
+                                            ->whereYear('created_at', date('Y'))
+                                            ->where('tipo_pagamento_id', $tipo_pagamento->id)
+                                            ->sum('valor');
+        }
+
+        foreach ($retorno->tipos_pagamento as $tipo_pagamento)
+        {
+            $retorno->receitas_tp_pgto_dia[] = Receita::whereDate('created_at', date('Y-m-d'))
+                                            ->where('tipo_pagamento_id', $tipo_pagamento->id)
+                                            ->sum('valor');
+        }
+
+        $retorno->tipos_pagamento = json_encode($retorno->tipos_pagamento->pluck('name')->toArray());
+        $retorno->receitas_tp_pgto_mes = json_encode($retorno->receitas_tp_pgto_mes);
+        $retorno->receitas_tp_pgto_dia = json_encode($retorno->receitas_tp_pgto_dia);
 
         $meses = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 

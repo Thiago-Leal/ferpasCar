@@ -111,7 +111,7 @@ body {
 }
 
 .back{
-	background-image: url('/vendor/adminlte/dist/img/Logo_Ferds_Lava_Car.png');
+	background-image: url('/Logo_Ferds_Lava_Car.png');
 	background-repeat:   no-repeat;
 	background-position: 0% 0%;
 	background-size: 100% 150%;

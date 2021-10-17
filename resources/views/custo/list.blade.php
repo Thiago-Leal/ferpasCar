@@ -13,7 +13,7 @@
                 <td>{{$custo->id}}.</td>
                 <td>{{$custo->name}}</td>
                 <td>R$ {{number_format($custo->valor, 2, ',', '.')}}</td>
-                <td>{{$custo->tipo_custo->name}}</td>
+                <td>{{@$custo->tipo_custo->name}}</td>
                 <td>{!! date('d/m/Y', strtotime($custo->created_at)) !!}</td>                
                 <td>
                     <div class="btn-group pull-right">

@@ -20,7 +20,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="inputNome">Nome</label>
-                        {!! Form::text('q[name]', isset($q['name']) ? $q['name'] : null, ['class'=>'form-control', 'placeholder' => 'Nome do tipo da caixa']) !!}
+                        {!! Form::text('q[name]', isset($q['name']) ? $q['name'] : null, ['class'=>'form-control', 'placeholder' => 'Nome do tipo da custo']) !!}
                     </div>
                 </div>
             </div>

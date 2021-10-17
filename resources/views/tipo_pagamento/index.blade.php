@@ -1,26 +1,26 @@
 @extends('adminlte::page')
 
-@section('title', 'Tipos de Receita')
+@section('title', 'Tipos de Pagamento')
 
 @section('content_header')
-    <h1>Tipos de Receita</h1>
+    <h1>Tipos de Pagamento</h1>
 @stop
 
 @section('content')
     <div class="box box-default">
             <div class="box-tools pull-right" style="text-align: right;">
-                <a href="{{ route('tipo_receita.create') }}" class="btn pull-right"><i class="fa fa-plus"></i> Adicionar</a>
+                <a href="{{ route('tipo_pagamento.create') }}" class="btn pull-right"><i class="fa fa-plus"></i> Adicionar</a>
             </div>
         <div class="box-header with-border">
             <h3 class="box-title">Pesquisa</h3>
         </div>
-        {!! Form::open(['route' => 'tipo_receita.index', 'method'=>'get', 'class'=>'form']) !!}
+        {!! Form::open(['route' => 'tipo_pagamento.index', 'method'=>'get', 'class'=>'form']) !!}
         <div class="box-body">
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="inputNome">Nome</label>
-                        {!! Form::text('q[name]', isset($q['name']) ? $q['name'] : null, ['class'=>'form-control', 'placeholder' => 'Nome do tipo da receita']) !!}
+                        {!! Form::text('q[name]', isset($q['name']) ? $q['name'] : null, ['class'=>'form-control', 'placeholder' => 'Nome do tipo da pagamento']) !!}
                     </div>
                 </div>
             </div>
@@ -41,8 +41,8 @@
             <h3 class="box-title">Resultado da pesquisa</h3>
         </div>
         <div class="box-body ">
-            @include('tipo_receita.list')
-            {!! $tipo_receitas->appends(['q' => $q])->links() !!}
+            @include('tipo_pagamento.list')
+            {!! $tipo_pagamentos->appends(['q' => $q])->links() !!}
         </div>
     </div>
 @stop

@@ -20,13 +20,27 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="inputNome">Nome</label>
-                        {!! Form::text('q[name]', isset($q['name']) ? $q['name'] : null, ['class'=>'form-control', 'placeholder' => 'Nome do tipo da caixa']) !!}
+                        {!! Form::text('q[name]', isset($q['name']) ? $q['name'] : null, ['class'=>'form-control', 'placeholder' => 'Nome da receita']) !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="inputNome">Tipo de Receita</label>
                         {!! Form::select('q[tipo_receita_id]', [''=>'']+App\Models\TipoReceita::pluck('name','id')->all(), !empty($q['tipo_receita_id'])?$q['tipo_receita_id']:null, ['class'=>'form-control ']) !!}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="inputNome">Tipo de Pagamento</label>
+                        {!! Form::select('q[tipo_pagamento_id]', [''=>'']+App\Models\TipoPagamento::pluck('name','id')->all(), !empty($q['tipo_pagamento_id'])?$q['tipo_pagamento_id']:null, ['class'=>'form-control ']) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="inputNome">Data</label>
+                        {!! Form::text('q[data]', isset($q['data']) ? $q['data'] : null, ['class'=>'form-control', 'placeholder' => 'dd/mm/aaaa']) !!}
                     </div>
                 </div>
             </div>

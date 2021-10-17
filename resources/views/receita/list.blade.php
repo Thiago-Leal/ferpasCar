@@ -5,6 +5,7 @@
             <th>Nome</th>
             <th>Valor</th>
             <th>Tipo de Receita</th>
+            <th>Tipo de Pagamento</th>
             <th>Data de Criação</th>
             <th></th>
         </tr>
@@ -13,7 +14,8 @@
                 <td>{{$receita->id}}.</td>
                 <td>{{$receita->name}}</td>
                 <td>R$ {{number_format($receita->valor, 2, ',', '.')}}</td>
-                <td>{{$receita->tipo_receita->name}}</td>
+                <td>{{@$receita->tipo_receita->name}}</td>
+                <td>{{@$receita->tipo_pagamento->name}}</td>
                 <td>{!! date('d/m/Y H:i:s', strtotime($receita->created_at)) !!}</td>                
                 <td>
                     <div class="btn-group pull-right">

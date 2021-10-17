@@ -257,6 +257,10 @@ return [
                     'url'  => '/tipo_custo',
                 ],
                 [
+                    'text' => 'Tipos de Pagamentos',
+                    'url'  => '/tipo_pagamento',
+                ],
+                [
                     'text' => 'Alterar Senha',
                     'url'  => '/user/edit',
                 ],              
