@@ -7,6 +7,7 @@ use App\Models\Receita;
 use App\Models\Custo;
 use App\Models\TipoCusto;
 use App\Models\TipoPagamento;
+use App\Models\TipoReceita;
 use Illuminate\Support\Facades\DB;
 
 class RelatorioController extends Controller
@@ -42,6 +43,7 @@ class RelatorioController extends Controller
         $retorno->qtd_servico_anual = Receita::whereYear('created_at', date('Y'))->count();
 
         $retorno->tipos_pagamento = TipoPagamento::all();
+        $retorno->tipos_receita = TipoReceita::all();
 
         foreach ($retorno->tipos_pagamento as $tipo_pagamento)
         {
@@ -51,16 +53,18 @@ class RelatorioController extends Controller
                                             ->sum('valor');
         }
 
-        foreach ($retorno->tipos_pagamento as $tipo_pagamento)
+        foreach ($retorno->tipos_receita as $tipo_receita)
         {
-            $retorno->receitas_tp_pgto_dia[] = Receita::whereDate('created_at', date('Y-m-d'))
-                                            ->where('tipo_pagamento_id', $tipo_pagamento->id)
+            $retorno->receitas_tp_receita_mes[] = Receita::whereMonth('created_at', date('m'))
+                                            ->whereYear('created_at', date('Y'))
+                                            ->where('tipo_receita_id', $tipo_receita->id)
                                             ->sum('valor');
         }
 
         $retorno->tipos_pagamento = json_encode($retorno->tipos_pagamento->pluck('name')->toArray());
+        $retorno->tipos_receita = json_encode($retorno->tipos_receita->pluck('name')->toArray());
         $retorno->receitas_tp_pgto_mes = json_encode($retorno->receitas_tp_pgto_mes);
-        $retorno->receitas_tp_pgto_dia = json_encode($retorno->receitas_tp_pgto_dia);
+        $retorno->receitas_tp_receita_mes = json_encode($retorno->receitas_tp_receita_mes);
 
         $meses = ['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'];
 

@@ -86,10 +86,10 @@
 
     </div>		
 
-    <div class="col-md-3">
+    <!--div class="col-md-3">
       <div class="card card-green">
         <div class="card-header">
-          <h3 class="card-title">Tipos de Pagamentos Dia</h3>
+          <h3 class="card-title">Tipos de Receitas Mes</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -104,8 +104,8 @@
           <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 731px;" width="731" height="250" class="chartjs-render-monitor"></canvas>
         </div>
       </div>
-    </div>
-    <div class="col-md-3">
+    </div-->
+    <div class="col-md-6">
       <div class="card card-green">
         <div class="card-header">
           <h3 class="card-title">Tipos de Pagamentos Mês</h3>
@@ -217,8 +217,9 @@
 
 var historico = JSON.parse('{!! $historico !!}');
 var tipos_pagamento = JSON.parse('{!! $retorno->tipos_pagamento !!}');
+var tipos_receita = JSON.parse('{!! $retorno->tipos_receita !!}');
 var receitas_tp_pgto_mes = JSON.parse('{!! $retorno->receitas_tp_pgto_mes !!}');
-var receitas_tp_pgto_dia = JSON.parse('{!! $retorno->receitas_tp_pgto_dia !!}');
+var receitas_tp_receita_mes = JSON.parse('{!! $retorno->receitas_tp_receita_mes !!}');
 
 $(function () {
   'use strict'
@@ -356,12 +357,12 @@ $(function () {
   //- DONUT CHART -
   //-------------
   // Get context with jQuery - using jQuery's .get() method.
-  var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+  /*var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
   var donutData        = {
-    labels: tipos_pagamento,
+    labels: tipos_receita,
     datasets: [
       {
-        data: receitas_tp_pgto_dia,
+        data: receitas_tp_receita_mes,
         backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
       }
     ]
@@ -376,7 +377,7 @@ $(function () {
     type: 'doughnut',
     data: donutData,
     options: donutOptions
-  })
+  })*/
 
   //-------------
   //- DONUT CHART -
