@@ -3,7 +3,7 @@
 @section('title', 'Fluxo de Caixa')
 
 @section('content_header')
-    <h1>Fluxo de Caixa</h1>
+    <h1>Fluxo de Caixa - <b>{{ Session::get('EMPRESA_DESCRICAO')}}</b></h1>
 @stop
 
 @section('content')

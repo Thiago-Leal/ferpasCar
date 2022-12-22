@@ -34,6 +34,9 @@ class RelatorioController extends Controller
         $retorno->qtd_servico_mes_ant = Receita::whereMonth('created_at', date('m', strtotime('last month')))
                                     ->whereYear('created_at', date('Y', strtotime('last month')))
                                     ->count();
+
+		$retorno->receitas_tp_pgto_mes = [];
+		$retorno->receitas_tp_receita_mes = [];
         
         if ($retorno->qtd_servico_mes_ant == 0)
             $retorno->diff_qtd_servico = 0;

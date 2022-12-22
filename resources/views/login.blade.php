@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title> Ferds Car Wash </title>
   
-   
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
   
 <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
@@ -49,6 +49,7 @@
   -webkit-transition: all 0.3 ease;
   transition: all 0.3 ease;
   cursor: pointer;
+  margin-top: 10px;
 }
 .form button:hover,.form button:active,.form button:focus {
   background: #43A047;
@@ -156,6 +157,15 @@ body {
 	      {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
 	      <input type="password" name="password" placeholder="password"/>
 	      {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
+
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+          <input type="radio" class="btn-check" name="empresa" value="1" id="btnradio1" autocomplete="off" checked>
+          <label class="btn btn-outline-primary" for="btnradio1">Car Wash</label>
+
+          <input type="radio" class="btn-check" name="empresa" value="2" id="btnradio2" autocomplete="off">
+          <label class="btn btn-outline-primary" for="btnradio2">Car Oil</label>
+        </div>
+        
 	      <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 	      <button>login</button>
 	      {!! $errors->first('form', '<p class="help-block">:message</p>') !!}

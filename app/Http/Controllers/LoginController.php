@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Config;
+use DB;
 
 class LoginController extends Controller
 {
@@ -32,6 +34,12 @@ class LoginController extends Controller
 
             $request->session()->regenerate();
 
+            //1 = wash | 2 = Oil
+            session([
+                'CONNECTION' => ($request['empresa'] == 1 ? 'mysql' : 'mysql_ferpasOil'), 
+                'EMPRESA_DESCRICAO' => $request['empresa'] == 1 ? 'Lava-Car' : 'Troca de Óleo',
+            ]);
+            
             return redirect()->intended('/home');
         }
 

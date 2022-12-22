@@ -23,6 +23,8 @@
 @stop
 
 @php
+    $tipo_receitas = [];
+    
     foreach(App\Models\TipoReceita::all() as $tipo_receita) {
         $tipo_receitas[$tipo_receita->id] = number_format($tipo_receita->valor, 2, ',', '.');
     }

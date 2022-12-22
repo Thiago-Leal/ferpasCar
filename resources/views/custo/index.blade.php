@@ -3,7 +3,7 @@
 @section('title', 'Custos')
 
 @section('content_header')
-    <h1>Custos</h1>
+    <h1>Custos - <b>{{ Session::get('EMPRESA_DESCRICAO')}}</b></h1>
 @stop
 
 @section('content')
